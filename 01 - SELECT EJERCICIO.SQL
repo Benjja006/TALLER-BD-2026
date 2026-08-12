@@ -1,0 +1,41 @@
+
+
+ SELECT * FROM TICKET;
+ SELECT * FROM TRANSACCION_PAGO;
+ SELECT * FROM RESERVA_TEMPORAL;
+
+
+DECLARE
+
+
+    TYPE BOLETA_CLIENTE IS RECORD(
+        nombre_cliente CLIENTE.NOMBRE%TYPE,
+        estado_reserva RESERVA_TEMPORAL.ESTADO%TYPE,
+        estado_pago TRANSACCION_PAGO.ESTADO%TYPE,
+        monto_bruto TRANSACCION_PAGO.MONTO_BRUTO%TYPE,
+        descuento_monto TRANSACCION_PAGO.DESCUENTO%TYPE,
+        monto_final TRANSACCION_PAGO.MONTO_BRUTO%TYPE
+    );
+
+    V_BOLETA BOLETA_CLIENTE;
+BEGIN
+
+    SELECT C.NOMBRE ||' '|| C.APELLIDO AS NOMBRE, 
+    TP.MONTO_BRUTO, TP.DESCUENTO, 
+    TP.MONTO_FINAL
+    FROM CLIENTE C
+    INNER JOIN RESERVA_TEMPORAL RT ON RT.CLIENTE_ID = C.CLIENTE_ID 
+    INNER JOIN TRANSACCION_PAGO TP ON TP.RESERVA_ID = RT.RESERVA_ID
+    WHERE C.CLIENTE_ID = 1;
+    
+    DBMS_OUTPUT.PUT_LINE('******** PUNTOTICKET BENJITA ********');
+    DBMS_OUTPUT.PUT_LINE('||||||||   NOMBRE CLIENTE   ||||||||'|| V_BOLETA.nombre_cliente);
+    DBMS_OUTPUT.PUT_LINE('||||||||  ESTADO DE RESERVA ||||||||'|| V_BOLETA.estado_reserva);
+    DBMS_OUTPUT.PUT_LINE('||||||||   ESTADO DE PAGO   ||||||||'|| V_BOLETA.estado_reserva);
+    DBMS_OUTPUT.PUT_LINE('||||||||     MONTO BRUTO    ||||||||'|| V_BOLETA.monto_bruto);
+    DBMS_OUTPUT.PUT_LINE('|||||||| DESCUETNO APLICADO ||||||||'|| V_BOLETA.descuento_monto);
+    DBMS_OUTPUT.PUT_LINE('||||||||     MONTO FINAL    ||||||||'|| V_BOLETA.monto_final);
+
+
+    
+END;
