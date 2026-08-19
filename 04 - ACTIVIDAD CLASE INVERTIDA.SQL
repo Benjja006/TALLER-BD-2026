@@ -1,0 +1,45 @@
+/* ============================================================
+    Eventos por productora:
+    Se necesita obtener un listado de los eventos registrados, mostrando el NOMBRE DEL EVENTO, LA PRODUCTORA RESPONSABLE,
+    el RECINTO donde se realizará y el ESTADO ACTUAL del evento. La información debe permitir conocer qué productora
+    organiza cada evento y dónde se llevará a cabo.
+   ============================================================ */
+
+SELECT * FROM EVENTO;
+SELECT * FROM PRODUCTORA;
+SELECT * FROM RECINTO;
+
+DECLARE
+    CURSOR C_EVENTOS_REGISTRADOS IS
+    SELECT E.NOMBRE AS NOMBRE_EVENTO , 
+    P.NOMBRE_FANTASIA AS NOMBRE_PRODUCTORA, 
+    R.NOMBRE AS NOMBRE_RECINTO,
+    E.ESTADO AS ESTADO_EVENTO
+    FROM EVENTO E
+    INNER JOIN PRODUCTORA P ON P.PRODUCTORA_ID = E.PRODUCTORA_ID
+    INNER JOIN RECINTO R ON E.RECINTO_ID = R.RECINTO_ID;
+
+
+    V_NOMBRE_EVENTO EVENTO.NOMBRE%TYPE;
+    V_ESTADO EVENTO.ESTADO%TYPE;
+    V_NOMBRE_RECINTO RECINTO.RECINTO_ID%TYPE;
+    V_NOMBRE_PRODUCTORA PRODUCTORA.NOMBRE_FANTASIA%TYPE;
+
+BEGIN
+    OPEN C_EVENTOS_REGISTRADOS;
+
+        LOOP
+          
+        END LOOP;
+
+    NULL;
+END;
+/
+
+    SELECT E.NOMBRE AS NOMBRE_EVENTO , 
+    P.NOMBRE_FANTASIA AS NOMBRE_PRODUCTORA, 
+    R.NOMBRE AS NOMBRE_RECINTO,
+    E.ESTADO AS ESTADO_EVENTO
+    FROM EVENTO E
+    INNER JOIN PRODUCTORA P ON P.PRODUCTORA_ID = E.PRODUCTORA_ID
+    INNER JOIN RECINTO R ON E.RECINTO_ID = R.RECINTO_ID;
