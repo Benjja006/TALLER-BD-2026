@@ -1,0 +1,4 @@
+-- UN SOLO DATO (una sola columna, una sola fila) -> VARIABLE ESCALAR
+-- UNA FILA COMPLETA CON MÚLTIPLES DATOS (diferentes tipos de columnas) -> RECORD (%ROWTYPE)
+-- MÚLTIPLES DATOS DEL MISMO TIPO -> VARRAY / NESTED TABLE (Colecciones)
+-- MÚLTIPLES FILAS -> CURSOR / TABLA DE REGISTROS
